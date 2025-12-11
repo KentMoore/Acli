@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>我的兴趣与爱好 · 关于我 / 联系方式</title>
+    <meta name="viewport" content="width=1200, initial-scale=0.3" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <header class="hero hero-sub">
+        <nav class="nav">
+            <a href="index.html" class="logo">My Web · Me</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="detail.html">兴趣详情</a></li>
+                <li><a href="about.html">关于我 / 联系</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-tag">关于我 / 联系方式</span>
+                <h1>把自己介绍清楚，也是一个重要的能力</h1>
+                <p class="typed-static">
+                    这一页会更具体地介绍我的性格、学习习惯和未来规划，
+                    并放上一个简单的“留言表单”，模仿真实网站的联系模块。
+                </p>
+                <div class="hero-actions">
+                    <a href="#about-me" class="btn-primary">先看关于我</a>
+                    <a href="#contact" class="btn-ghost">直接去留言板</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/hobby-life.png" alt="关于我插画" loading="lazy" />
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 关于我 -->
+        <section id="about-me" class="section section-light">
+            <div class="container">
+                <h2>关于我</h2>
+                <p class="section-desc">
+                    在真正的简历或个人网站里，“关于我”这一块非常重要。
+                    这里我用比较轻松的方式，把自己的情况简单说一说。
+                </p>
+
+                <div class="about-grid reveal">
+                    <div class="about-card">
+                        <h3>性格与习惯</h3>
+                        <p>有点慢热，但一旦对某件事感兴趣，就会想方设法把它弄明白，哪怕中间会遇到很多报错。</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>学习方式</h3>
+                        <p>喜欢边实践边查资料，一边看官方文档、一边动手敲命令，遇到问题就记在笔记里。</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>时间安排</h3>
+                        <p>尽量保证每天至少有一点“纯学习时间”，不被手机和其它事情打断。</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>对未来的期望</h3>
+                        <p>希望能在技术领域找到适合自己的位置，用稳定的能力换来自由的生活。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section section-dark">
+            <div class="container">
+                <h2>常见问题（FAQ）</h2>
+                <p class="section-desc">
+                    很多真实网站都会有 FAQ 模块，我也假装回答几个“如果别人看到这个网页，可能会问的问题”。
+                </p>
+
+                <div class="faq-list reveal">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            这个网站是完全自己写的吗？<span class="faq-icon">＋</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                结构和样式由我结合课程要求设计，在实现过程中有使用 AI 工具来辅助生成部分代码与文案，
+                                然后再根据自己的情况进行修改和完善。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            你最想先做好哪一块能力？<span class="faq-icon">＋</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                目前最想把编程基础和大数据相关能力打牢，
+                                因为这两块可以同时服务于兴趣和未来的职业计划。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            以后还会继续维护这个网站吗？<span class="faq-icon">＋</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                有机会的话会继续扩展，比如接入真正的后台、数据可视化等，
+                                让它从“作业项目”升级为“个人主页”。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系方式 / 留言表单 -->
+        <section id="contact" class="section section-light">
+            <div class="container">
+                <h2>联系我</h2>
+                <p class="section-desc">
+                    下面的表单只是一个前端示意，并不会真正提交到服务器。
+                    主要是为了满足作业中“交互功能、用户反馈”的要求，也模仿真实网站的“联系我”模块。
+                </p>
+
+                <div class="contact-layout reveal">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">你的称呼</label>
+                            <input type="text" id="name" name="name" placeholder="例如：某某老师 / 同学 / 朋友" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">联系方式（可选）</label>
+                            <input type="email" id="email" name="email" placeholder="邮箱 / 社交账号（可以不填）" />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">想对我说的话</label>
+                            <textarea id="message" name="message" rows="4" placeholder="写下你此刻的想法或一句建议..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">假装提交一下</button>
+                        <p id="form-result" class="form-result"></p>
+                    </form>
+
+                    <aside class="contact-info">
+                        <h3>小结：这个网站的意义</h3>
+                        <p>
+                            这个网页既是一次作业，也是一次尝试：
+                            把“我”这个主题认真拆开，用网页的形式表达出来，
+                            顺便练习 HTML、CSS、JavaScript 和简单的交互设计。
+                        </p>
+                        <ul class="contact-list">
+                            <li>📍 主要活动地点：在电脑前</li>
+                            <li>🧑‍💻 关键词：大数据、编程、游戏、音乐</li>
+                            <li>🔮 未来方向：希望成为大数据运维 / 后端工程师</li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#" id="back-to-top" class="back-to-top" aria-label="回到顶部">↑</a>
+
+    <footer class="footer">
+        <div class="footer-inner container">
+            <div class="footer-col">
+                <h4>关于我</h4>
+                <p>这一页更偏向自我介绍和沟通，希望让别人看到一个更立体的“我”。</p>
+            </div>
+            <div class="footer-col">
+                <h4>返回其他页面</h4>
+                <ul>
+                    <li><a href="index.html">返回首页</a></li>
+                    <li><a href="detail.html">兴趣详情页</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>更多内容</h4>
+                <ul>
+                    <li><a href="#about-me">关于我</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                    <li><a href="#contact">联系我</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2025 我的兴趣与爱好 | 班级:24大数据1班 学号:241903440120 姓名:赖锦添</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

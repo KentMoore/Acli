@@ -1,0 +1,22 @@
+.rx_line{
+	float:right;
+	height:75px;
+	line-height:75px;
+	font-size:30px;
+	color: #4796d8;
+	}
+.today_info{float:left;}
+.today_add{float:right;}
+.today_info b{color:#f60;}
+.today_add span{
+	background-color:#33B2E7;
+	display:inline-block;
+	color:#fff;
+	text-align:center;
+	width:100px;
+	height:30px;
+	line-height:30px;
+	}
+	
+	
+

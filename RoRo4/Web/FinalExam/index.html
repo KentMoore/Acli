@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>我的兴趣与爱好 · 首页</title>
+    <meta name="viewport" content="width=1200, initial-scale=0.3" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <header class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <nav class="nav">
+            <a href="index.html" class="logo">My Web · Me</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="detail.html">兴趣详情</a></li>
+                <li><a href="about.html">关于我 / 联系</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-tag">个人兴趣 · 技术成长 · 生活记录</span>
+                <h1 class="glitch" data-text="把兴趣爱好，慢慢变成真正的实力">把兴趣爱好，慢慢变成真正的实力</h1>
+                <p id="typed-text" class="typed"></p>
+                <div class="hero-actions">
+                    <a href="#overview" id="scroll-down" class="btn-primary">从这里开始了解我</a>
+                    <a href="detail.html" class="btn-ghost">查看兴趣详情页</a>
+                </div>
+                <div class="hero-meta">
+                    <span>🎯 目标：大数据运维 / 后端方向</span>
+                    <span>⏱ 持续学习：<span id="learning-days"></span> 天+</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Desktop: Web 终端 -->
+                <div class="terminal-wrapper">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">visitor@web:~</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div id="terminal-output" class="terminal-output"></div>
+                            <div class="terminal-input-line">
+                                <span class="cmd-prompt">visitor@web:~$</span>
+                                <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" />
+                                <span class="cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 顶部统计条 -->
+        <section class="stats-strip reveal reveal-delay-200">
+            <div class="stats-item">
+                <div class="stat-number" data-target="1200">0</div>
+                <div class="stat-label">累计学习时长（小时，估算）</div>
+            </div>
+            <div class="stats-item">
+                <div class="stat-number" data-target="8">0</div>
+                <div class="stat-label">折腾过的大数据组件</div>
+            </div>
+            <div class="stats-item">
+                <div class="stat-number" data-target="6">0</div>
+                <div class="stat-label">完成的小项目 / Demo</div>
+            </div>
+            <div class="stats-item">
+                <div class="stat-number" data-target="1">0</div>
+                <div class="stat-label">正在追的主线目标</div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <!-- 首页概览 -->
+        <section id="overview" class="section section-light">
+            <div class="container">
+                <h2>这就是现在的我</h2>
+                <p class="section-desc">
+                    这是一个以“我”为主题的小网站，记录了我的兴趣爱好、大学生活和未来计划。
+                    通过这个网页，你可以快速了解我在学什么、爱玩什么、在计划什么。
+                </p>
+
+                <div class="about-grid reveal">
+                    <div class="about-card">
+                        <h3>兴趣：大数据 & 编程</h3>
+                        <p>喜欢搭建大数据环境，写 Java / Python 代码，让数据在集群里跑起来。</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>娱乐：游戏 & 音乐</h3>
+                        <p>空闲时会玩 CS:GO，听 LoFi 或纯音乐，让自己在紧张和放松之间切换。</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>身份：普通学生</h3>
+                        <p>在大学中不断探索方向，从“会用电脑”到“用电脑做点有意思的事”。</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>目标：成为更专业的自己</h3>
+                        <p>希望将来进入大数据 / 运维相关岗位，把兴趣真正变成能力和饭碗。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 首页卡片：快速跳转 -->
+        <section class="section section-dark">
+            <div class="container">
+                <h2>你可以在这个网站看到什么？</h2>
+                <p class="section-desc">
+                    仿照很多官网的做法，我把网站分成了三个主要板块：兴趣详情、生活与成长、联系方式。
+                    你可以点击下方卡片，跳转到对应页面。
+                </p>
+                <div class="cards-grid reveal">
+                    <article class="card">
+                        <img src="images/hobby-game.png" alt="兴趣详情" loading="lazy" />
+                        <div class="card-body">
+                            <h3>兴趣详情页</h3>
+                            <p>详细介绍我在大数据、编程、游戏和音乐方面的兴趣，以及一些小项目想法。</p>
+                            <a href="detail.html" class="btn-ghost">前往兴趣详情</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img src="images/hobby-life.png" alt="成长路线" loading="lazy" />
+                        <div class="card-body">
+                            <h3>成长路线</h3>
+                            <p>用时间线的形式记录我从入门到进阶的几个阶段，让自己更清楚地知道在往哪里走。</p>
+                            <a href="detail.html#journey" class="btn-ghost">查看成长路线</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img src="images/hobby-music.png" alt="关于我与联系" loading="lazy" />
+                        <div class="card-body">
+                            <h3>关于我 / 联系方式</h3>
+                            <p>简单介绍我的性格、习惯、学习方式，并放上一个留言表单，模仿真正的网站联系模块。</p>
+                            <a href="about.html" class="btn-ghost">前往关于我</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 首页最近动态简版 -->
+        <section class="section section-light">
+            <div class="container">
+                <h2>最近动态一角</h2>
+                <p class="section-desc">
+                    这一块模仿很多网站的“最新更新 / 博客”区域，用来简要记录我最近在做的几件事。
+                    更详细的记录可以在兴趣详情页中看到。
+                </p>
+
+                <div class="activity-list reveal">
+                    <article class="activity-item">
+                        <span class="activity-date">最近</span>
+                        <h3>用 AI 辅助设计“以我为主题”的个人网站</h3>
+                        <p>结合老师的作业要求，我尝试用 AI 辅助生成网页结构和代码，再根据自己的情况进行修改。</p>
+                        <span class="activity-tag">#Web作业</span>
+                    </article>
+                    <article class="activity-item">
+                        <span class="activity-date">最近</span>
+                        <h3>继续刷 Spring Boot + MySQL 登录注册</h3>
+                        <p>练习用户注册、登录、权限拆分等功能，为后续做真正的小系统做准备。</p>
+                        <span class="activity-tag">#Java后端</span>
+                    </article>
+                    <article class="activity-item">
+                        <span class="activity-date">最近</span>
+                        <h3>整理自己的发展路线</h3>
+                        <p>把“大数据运维工程师”当成目标，拆成多个阶段一步步去完成。</p>
+                        <span class="activity-tag">#自我规划</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#" id="back-to-top" class="back-to-top" aria-label="回到顶部">↑</a>
+
+    <footer class="footer">
+        <div class="footer-inner container">
+            <div class="footer-col">
+                <h4>My Web · Me</h4>
+                <p>一个围绕“我”的小网站，用来展示兴趣、记录成长、完成一次作业。</p>
+            </div>
+            <div class="footer-col">
+                <h4>页面导航</h4>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="detail.html">兴趣详情</a></li>
+                    <li><a href="about.html">关于我 / 联系</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>内容概览</h4>
+                <ul>
+                    <li>大数据 & 编程</li>
+                    <li>游戏 & 音乐</li>
+                    <li>大学生活 & 未来规划</li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2025 我的兴趣与爱好 | 班级:24大数据1班 学号:241903440120 姓名:赖锦添</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
