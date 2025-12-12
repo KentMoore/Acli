@@ -9,7 +9,6 @@ import org.apache.hadoop.hbase.filter.RowFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 public class QualifierFilterDemo {
     static Connection connection;
@@ -23,8 +22,7 @@ public class QualifierFilterDemo {
         Scan scan = new Scan();
         RowFilter rowFilter = new RowFilter(
                 CompareOperator.EQUAL,
-                new BinaryComparator(Bytes.toBytes("quantity"))
-        );
+                new BinaryComparator(Bytes.toBytes("quantity")));
         scan.setFilter(rowFilter);
 
         for (Result result : table.getScanner(scan)) {
@@ -32,29 +30,29 @@ public class QualifierFilterDemo {
             String rowkey = Bytes.toString(result.getRow());
 
             // 获取水果信息（字符串）
-//            String fruitName = Bytes.toString(result.getValue(
-//                    Bytes.toBytes("fruit_info"), Bytes.toBytes("fruitName")));
-//            String fruitType = Bytes.toString(result.getValue(
-//                    Bytes.toBytes("fruit_info"), Bytes.toBytes("fruitType")));
-//            String fruitOrigin = Bytes.toString(result.getValue(
-//                    Bytes.toBytes("fruit_info"), Bytes.toBytes("fruitOrigin")));
+            // String fruitName = Bytes.toString(result.getValue(
+            // Bytes.toBytes("fruit_info"), Bytes.toBytes("fruitName")));
+            // String fruitType = Bytes.toString(result.getValue(
+            // Bytes.toBytes("fruit_info"), Bytes.toBytes("fruitType")));
+            // String fruitOrigin = Bytes.toString(result.getValue(
+            // Bytes.toBytes("fruit_info"), Bytes.toBytes("fruitOrigin")));
 
             // ====== 关键修改 ======
             // unitPrice: 写入是String，读取也用String，再转BigDecimal
-//            String unitPriceStr = Bytes.toString(result.getValue(
-//                    Bytes.toBytes("sale_info"), Bytes.toBytes("unitPrice")));
-//            BigDecimal unitPrice = new BigDecimal(unitPriceStr);
+            // String unitPriceStr = Bytes.toString(result.getValue(
+            // Bytes.toBytes("sale_info"), Bytes.toBytes("unitPrice")));
+            // BigDecimal unitPrice = new BigDecimal(unitPriceStr);
 
             // quantity: 写入是Long，读取也用Long ✓
             Long quantity = Bytes.toLong(result.getValue(
                     Bytes.toBytes("sale_info"), Bytes.toBytes("quantity")));
 
             // totalPrice: 写入是String，读取也用String，再转BigDecimal
-//            String totalPriceStr = Bytes.toString(result.getValue(
-//                    Bytes.toBytes("sale_info"), Bytes.toBytes("totalPrice")));
-//            BigDecimal totalPrice = new BigDecimal(totalPriceStr);
+            // String totalPriceStr = Bytes.toString(result.getValue(
+            // Bytes.toBytes("sale_info"), Bytes.toBytes("totalPrice")));
+            // BigDecimal totalPrice = new BigDecimal(totalPriceStr);
 
-            System.out.println("水果编号:" + rowkey+",销量：" + quantity);
+            System.out.println("水果编号:" + rowkey + ",销量：" + quantity);
         }
 
         table.close();

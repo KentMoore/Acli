@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.hadoop.hbase.Cell;
-import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.CompareOperator;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Connection;
@@ -28,25 +27,23 @@ public class ValueFilterDemo02 {
         Scan scan = new Scan();
 
         ValueFilter valueFilter = new ValueFilter(
-            CompareOperator.EQUAL,
-            new BinaryComparator(Bytes.toBytes("Stone fruits"))   
-        );
+                CompareOperator.EQUAL,
+                new BinaryComparator(Bytes.toBytes("Stone fruits")));
         scan.setFilter(valueFilter);
 
         ResultScanner scanner = table.getScanner(scan);
-        
+
         for (Result result : scanner) {
             List<Cell> cellList = result.listCells();
             for (Cell cell : cellList) {
                 String rowkey = new String(
-                    cell.getRowArray(),
-                    cell.getRowOffset(),
-                    cell.getRowLength()  
-                );
-                 System.out.println("行键: " + rowkey);
-            }    
+                        cell.getRowArray(),
+                        cell.getRowOffset(),
+                        cell.getRowLength());
+                System.out.println("行键: " + rowkey);
+            }
         }
-        
+
         scanner.close();
         table.close();
         HBaseConnect.closeConnection();

@@ -2,7 +2,6 @@ package filter;
 
 import connect.HBaseConnect;
 import org.apache.hadoop.hbase.Cell;
-import org.apache.hadoop.hbase.CompareOperator;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.Result;
@@ -30,8 +29,7 @@ public class ColumnValueFilterDemo {
             // 获取 totalPrice 列的值
             byte[] totalPriceBytes = result.getValue(
                     Bytes.toBytes("sale_info"),
-                    Bytes.toBytes("totalPrice")
-            );
+                    Bytes.toBytes("totalPrice"));
 
             if (totalPriceBytes != null) {
                 String totalPriceStr = Bytes.toString(totalPriceBytes);
