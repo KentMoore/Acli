@@ -1,10 +1,6 @@
 package filter;
 
-import java.io.IOException;
-import java.util.List;
-
 import org.apache.hadoop.hbase.Cell;
-import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.CompareOperator;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Connection;
@@ -18,49 +14,52 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import connect.HBaseConnect;
 
+import java.io.IOException;
+import java.util.List;
+
+/**
+ * 值过滤器示例
+ * 
+ * 优化点：
+ * 1. 使用 try-with-resources 自动关闭 Table 和 ResultScanner 资源
+ * 2. 添加完善的异常处理
+ */
 public class ValueFilterDemo {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) {
+        // 获取连接
         Connection connection = HBaseConnect.getConnection();
-        TableName tableName = TableName.valueOf("commodity1:fruit_table");
+        // 获取表名
+        TableName tableName = TableName.valueOf("commodity:fruit_table");
 
-        Table table = connection.getTable(tableName);
+        try (Table table = connection.getTable(tableName)) {
+            // 创建Scan对象
+            Scan scan = new Scan();
+            // 创建值过滤器
+            ValueFilter valueFilter = new ValueFilter(
+                    CompareOperator.EQUAL,
+                    new BinaryComparator(Bytes.toBytes("Hainan")));
+            // 将值过滤器配置到scan中
+            scan.setFilter(valueFilter);
 
-        Scan scan = new Scan();
-
-        ValueFilter valueFilter = new ValueFilter(
-            CompareOperator.EQUAL,
-            new BinaryComparator(Bytes.toBytes("Hainan"))   
-        );
-        scan.setFilter(valueFilter);
-
-        ResultScanner scanner = table.getScanner(scan);
-        
-        for (Result result : scanner) {
-            List<Cell> cellList = result.listCells();
-            for (Cell cell : cellList) {
-                // 方法1：使用 CellUtil（推荐）
-                String rowkey = Bytes.toString(CellUtil.cloneRow(cell));
-                String family = Bytes.toString(CellUtil.cloneFamily(cell));
-                String qualifier = Bytes.toString(CellUtil.cloneQualifier(cell));
-                String value = Bytes.toString(CellUtil.cloneValue(cell));
-                
-                System.out.println("行键：" + rowkey);
-                System.out.println("列族：" + family);
-                System.out.println("列名：" + qualifier);
-                System.out.println("值：" + value);
-                System.out.println("-------------------");
-                
-                // 方法2：如果只要 rowkey，也可以这样写
-                // String rowkey = new String(
-                //     cell.getRowArray(),
-                //     cell.getRowOffset(),
-                //     cell.getRowLength()  // 这里是 getRowLength()
-                // );
-            }    
+            // 调用getScanner查询数据并遍历打印结果
+            try (ResultScanner scanner = table.getScanner(scan)) {
+                for (Result result : scanner) {
+                    List<Cell> cellList = result.listCells();
+                    for (Cell cell : cellList) {
+                        String rowKey = new String(
+                                cell.getRowArray(),
+                                cell.getRowOffset(),
+                                cell.getRowLength());
+                        System.out.println("水果编号：" + rowKey);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("值过滤查询失败: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            HBaseConnect.closeConnection();
         }
-        
-        scanner.close();
-        table.close();
-        HBaseConnect.closeConnection();
     }
 }

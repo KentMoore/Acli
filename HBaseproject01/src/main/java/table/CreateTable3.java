@@ -1,47 +1,67 @@
 package table;
-//在employee命名空间内创建staff_info表，
-
-//通过表的自定义属性"comment",添加表的描述信息"Employee information sheet"，
-//预分区数组为[“key10”,”key20”]
-//设置列族development_info，设置列族最大版本数为3，列族数据缓存到内存，
-//设置列族sale_info，每个数据块的大小为64kB，数据压缩方式设置为“SNAPPY”
 
 import connect.HBaseConnect;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.io.compress.Compression;
+import org.apache.hadoop.hbase.util.Bytes;
+
 import java.io.IOException;
 
+/**
+ * 创建表示例（带预分区）
+ * 
+ * 优化点：
+ * 1. 修复逻辑 Bug：原代码表存在判断反了
+ * 2. 使用两个列族
+ * 3. 使用 try-with-resources 自动关闭 Admin
+ */
 public class CreateTable3 {
-    public static void main(String[] args) throws IOException {
-        // 1.获取HBase连接
-        Connection conn = HBaseConnect.getConnection();
-        // 2.获取Admin对象
-        Admin admin = conn.getAdmin();
-        // 构造列族对象
-        ColumnFamilyDescriptor development_info = ColumnFamilyDescriptorBuilder
-                .newBuilder("development_info".getBytes())
-                .setMaxVersions(3)
-                .setInMemory(true)
-                .build();
-        ColumnFamilyDescriptor sale_info = ColumnFamilyDescriptorBuilder
-                .newBuilder("sale_info".getBytes())
-                .setBlocksize(64 * 1024)
-                .build();
-        // 构造表对象
-        TableName tableName = TableName.valueOf("employee:staff1");
-        TableDescriptor staff_info = TableDescriptorBuilder
-                .newBuilder(tableName)
-                .setColumnFamily(development_info)
-                .setColumnFamily(sale_info)
-                .setValue("comment", "employee staff information")
-                .build();
-        // 建表
-        if (admin.tableExists(tableName)) {
-            System.out.println("表已存在，不可重复创建");
-        } else {
-            admin.createTable(staff_info);
-            System.out.println("表已成功创建");
+        public static void main(String[] args) {
+                Connection conn = HBaseConnect.getConnection();
+
+                try (Admin admin = conn.getAdmin()) {
+                        // 构造列族对象
+                        ColumnFamilyDescriptor developmentInfo = ColumnFamilyDescriptorBuilder
+                                        .newBuilder("development_info".getBytes())
+                                        .setMaxVersions(3)
+                                        .setInMemory(true)
+                                        .build();
+
+                        ColumnFamilyDescriptor saleInfo = ColumnFamilyDescriptorBuilder
+                                        .newBuilder("sale_info".getBytes())
+                                        .setBlocksize(64 * 1024)
+                                        .setCompressionType(Compression.Algorithm.SNAPPY)
+                                        .build();
+
+                        // 构造表对象
+                        TableName tableName = TableName.valueOf("employee:staff_info");
+                        TableDescriptor staffInfo = TableDescriptorBuilder
+                                        .newBuilder(tableName)
+                                        .setColumnFamily(developmentInfo) // 添加 development_info 列族
+                                        .setColumnFamily(saleInfo) // 添加 sale_info 列族
+                                        .setValue("comment", "employee staff information")
+                                        .build();
+
+                        // 预分区键
+                        byte[][] keySplits = new byte[][] {
+                                        Bytes.toBytes("key10"),
+                                        Bytes.toBytes("key20"),
+                        };
+
+                        // 修复：原代码逻辑反了
+                        if (!admin.tableExists(tableName)) {
+                                admin.createTable(staffInfo, keySplits);
+                                System.out.println("表已成功创建");
+                        } else {
+                                System.out.println("表已存在，不可重复创建");
+                        }
+
+                } catch (IOException e) {
+                        System.err.println("创建表失败: " + e.getMessage());
+                        e.printStackTrace();
+                } finally {
+                        HBaseConnect.closeConnection();
+                }
         }
-        HBaseConnect.closeConnection();
-    }
 }

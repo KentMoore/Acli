@@ -7,22 +7,29 @@ import org.apache.hadoop.hbase.client.Connection;
 
 import java.io.IOException;
 
+/**
+ * 创建命名空间示例
+ * 
+ * 优化点：
+ * 1. 使用 try-with-resources 自动关闭 Admin
+ */
 public class CreateNamespace {
-    public static void main(String[] args) throws IOException {
-        //1.获取HBase连接
-        Connection conn= HBaseConnect.getConnection();
-        //2.获取Admin对象
-        Admin admin= conn.getAdmin();
-        //3.创建命名空间
-        //3.1构造一个命名空间对象
-        NamespaceDescriptor namespace= NamespaceDescriptor
-                .create("commodity1")
-                .addConfiguration("user","root")
-                .addConfiguration("describe","empolyee data")
-                .build();
-        //3.2admin调用createNamespace方法创建命名空间
-        admin.createNamespace(namespace);
-        //4.关闭连接
-        HBaseConnect.closeConnection();
+    public static void main(String[] args) {
+        Connection conn = HBaseConnect.getConnection();
+
+        try (Admin admin = conn.getAdmin()) {
+            NamespaceDescriptor namespace = NamespaceDescriptor
+                    .create("commodity1")
+                    .addConfiguration("user", "root")
+                    .addConfiguration("describe", "fstp data")
+                    .build();
+            admin.createNamespace(namespace);
+            System.out.println("命名空间创建成功");
+        } catch (IOException e) {
+            System.err.println("创建命名空间失败: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            HBaseConnect.closeConnection();
+        }
     }
 }
